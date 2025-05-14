@@ -37,6 +37,12 @@ export class IocContainer {
     }
 
     get<T>(key: InjectionKey<T>): T {
-        return this.instances.get(key) as T;
+        const instance = this.instances.get(key) as T;
+
+        if (!instance) {
+            throw new Error('Instance not found');
+        }
+
+        return instance;
     }
 }
