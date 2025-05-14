@@ -4,7 +4,7 @@ type OrSymbol<T extends readonly any[]> = {
   [P in keyof T]: T[P] | Symbol;
 };
 
-type ConstructorParametersOrSymbol<I, Class extends AnyConstructor<I>> = OrSymbol<ConstructorParameters<Class>>;
+type ConstructorParametersOrSymbols<I, Class extends AnyConstructor<I>> = OrSymbol<ConstructorParameters<Class>>;
 
 export class IocContainer {
     private readonly instances;
@@ -14,7 +14,7 @@ export class IocContainer {
     }
 
     private getDependencies<I, Class extends AnyConstructor<I>>(
-        args: ConstructorParametersOrSymbol<I, Class>
+        args: ConstructorParametersOrSymbols<I, Class>
     ): ConstructorParameters<Class> {
         return args.map((arg) => {
             return typeof arg === 'symbol' ? this.get(arg) : arg;
@@ -24,7 +24,7 @@ export class IocContainer {
     bindSingleton<I, Class extends new (...args: any[]) => I> (
         key: Symbol,
         Implementation: Class,
-        args: ConstructorParametersOrSymbol<I, Class>
+        args: ConstructorParametersOrSymbols<I, Class>
     ) {
         const parameters = this.getDependencies<I, Class>(args);
 
