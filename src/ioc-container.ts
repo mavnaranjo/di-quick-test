@@ -1,3 +1,7 @@
+interface InjectionConstraint<T> {}
+
+export type InjectionKey<T> = symbol & InjectionConstraint<T>;
+
 type AnyConstructor<T> = new (...args: any[]) => T;
 
 type OrSymbol<T extends readonly any[]> = {
@@ -22,7 +26,7 @@ export class IocContainer {
     }
 
     bindSingleton<I, Class extends new (...args: any[]) => I> (
-        key: Symbol,
+        key: InjectionKey<I>,
         Implementation: Class,
         args: ConstructorParametersOrSymbols<I, Class>
     ) {
@@ -32,7 +36,7 @@ export class IocContainer {
         this.instances.set(key, instance);
     }
 
-    get<I>(key: Symbol): I {
-        return this.instances.get(key) as I;
+    get<T>(key: InjectionKey<T>): T {
+        return this.instances.get(key) as T;
     }
 }

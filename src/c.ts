@@ -1,6 +1,7 @@
+import { InjectionKey } from "./ioc-container";
 import { B } from './b';
 
-export const CId = Symbol();
+export const CId: InjectionKey<C> = Symbol();
 
 export interface C {
     hi(): string
