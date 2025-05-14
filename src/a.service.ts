@@ -1,12 +1,12 @@
 import { InjectionKey } from "./ioc-container";
 
-export const AId: InjectionKey<A> = Symbol();
+export const AServiceId: InjectionKey<AService> = Symbol();
 
-export interface A {
+export interface AService {
     hi(): string
 }
 
-export class AImpl implements A {
+export class AServiceImpl implements AService {
     private name: string;
 
     constructor(name: string) {

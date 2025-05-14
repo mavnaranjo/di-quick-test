@@ -17,27 +17,27 @@ export class IocContainer {
         this.instances = new Map<Symbol, unknown>();
     }
 
-    private getDependencies<I, Class extends AnyConstructor<I>>(
-        args: ConstructorParametersOrSymbols<I, Class>
-    ): ConstructorParameters<Class> {
+    private getDependencies<I, C extends AnyConstructor<I>>(
+        args: ConstructorParametersOrSymbols<I, C>
+    ): ConstructorParameters<C> {
         return args.map((arg) => {
             return typeof arg === 'symbol' ? this.get(arg) : arg;
-        }) as ConstructorParameters<Class>;
+        }) as ConstructorParameters<C>;
     }
 
-    bindSingleton<I, Class extends new (...args: any[]) => I> (
+    bindSingleton<I, C extends new (...args: any[]) => I> (
         key: InjectionKey<I>,
-        Implementation: Class,
-        args: ConstructorParametersOrSymbols<I, Class>
+        Implementation: C,
+        args: ConstructorParametersOrSymbols<I, C>
     ) {
-        const parameters = this.getDependencies<I, Class>(args);
+        const parameters = this.getDependencies<I, C>(args);
 
         const instance = new Implementation(...parameters);
         this.instances.set(key, instance);
     }
 
-    get<T>(key: InjectionKey<T>): T {
-        const instance = this.instances.get(key) as T;
+    get<I>(key: InjectionKey<I>): I {
+        const instance = this.instances.get(key) as I;
 
         if (!instance) {
             throw new Error('Instance not found');

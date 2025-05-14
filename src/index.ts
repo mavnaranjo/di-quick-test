@@ -1,13 +1,13 @@
 import container from './bootstrap';
 
-import { A, AId } from './a';
-import { B, BId } from './b';
-import { C, CId } from './c';
+import { AService, AServiceId } from './a.service';
+import { BService, BServiceId } from './b.service';
+import { CService, CServiceId } from './c.service';
 
-const a = container.get(AId);
-const b = container.get(BId);
-const c = container.get(CId);
+const aService = container.get(AServiceId);
+const bService = container.get(BServiceId);
+const cService = container.get(CServiceId);
 
-console.log(a.hi());
-console.log(b.hi());
-console.log(c.hi());
+console.log(aService.hi());
+console.log(bService.hi());
+console.log(cService.hi());
