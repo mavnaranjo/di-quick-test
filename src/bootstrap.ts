@@ -3,6 +3,7 @@ import { IocContainer } from "./ioc-container";
 import { AService, AServiceImpl, AServiceId } from "./a.service";
 import { BService, BServiceImpl, BServiceId } from "./b.service";
 import { CService, CServiceImpl, CServiceId } from "./c.service";
+import { DService, DServiceImpl, DServiceId } from "./d.service";
 
 const container = new IocContainer();
 
@@ -11,5 +12,7 @@ container.bindSingleton<AService, typeof AServiceImpl>(AServiceId, AServiceImpl,
 // Replace dependencies in constructor with its Symbol, so the library resolves and injects them
 container.bindSingleton<BService, typeof BServiceImpl>(BServiceId, BServiceImpl, [AServiceId, 32]);
 container.bindSingleton<CService, typeof CServiceImpl>(CServiceId, CServiceImpl, [BServiceId, 'male']);
+// Class without constructor parameters
+container.bindSingleton<DService, typeof DServiceImpl>(DServiceId, DServiceImpl, []);
 
 export default container;
