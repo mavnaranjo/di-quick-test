@@ -1,6 +1,6 @@
 interface InjectionConstraint<T> {}
 
-export type InjectionKey<T> = symbol & InjectionConstraint<T>;
+export type InjectionKey<T> = Symbol & InjectionConstraint<T>;
 
 type AnyConstructor<T> = new (...args: any[]) => T;
 
