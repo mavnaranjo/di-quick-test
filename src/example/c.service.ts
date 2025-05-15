@@ -1,4 +1,4 @@
-import { InjectionKey } from "./ioc-container";
+import { InjectionKey } from "../ioc-container";
 import { BService } from './b.service';
 
 export const CServiceId: InjectionKey<CService> = Symbol();

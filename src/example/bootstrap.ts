@@ -1,4 +1,4 @@
-import { IocContainer } from "./ioc-container";
+import { IocContainer } from "../ioc-container";
 
 import { AServiceImpl, AServiceId } from "./a.service";
 import { BServiceImpl, BServiceId } from "./b.service";
