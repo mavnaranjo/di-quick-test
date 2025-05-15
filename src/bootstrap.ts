@@ -1,9 +1,9 @@
 import { IocContainer } from "./ioc-container";
 
-import { AService, AServiceImpl, AServiceId } from "./a.service";
-import { BService, BServiceImpl, BServiceId } from "./b.service";
-import { CService, CServiceImpl, CServiceId } from "./c.service";
-import { DService, DServiceImpl, DServiceId } from "./d.service";
+import { AServiceImpl, AServiceId } from "./a.service";
+import { BServiceImpl, BServiceId } from "./b.service";
+import { CServiceImpl, CServiceId } from "./c.service";
+import { DServiceImpl, DServiceId } from "./d.service";
 
 const container = new IocContainer();
 
