@@ -4,7 +4,7 @@ export type InjectionKey<T> = Symbol & InjectionConstraint<T>;
 
 type AnyConstructor<T> = new (...args: any[]) => T;
 
-type OrSymbol<T extends readonly any[]> = { [P in keyof T]: T[P] | Symbol };
+type OrSymbol<T extends readonly unknown[]> = { [P in keyof T]: T[P] | Symbol };
 
 type ConstructorParametersWithSymbols<I, Class extends AnyConstructor<I>> = OrSymbol<ConstructorParameters<Class>>;
 
