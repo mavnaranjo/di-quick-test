@@ -1,12 +1,10 @@
-interface InjectionConstraint<T> {}
+interface InjectionConstraint<T> {};
 
 export type InjectionKey<T> = Symbol & InjectionConstraint<T>;
 
 type AnyConstructor<T> = new (...args: any[]) => T;
 
-type OrSymbol<T extends readonly any[]> = {
-  [P in keyof T]: T[P] | Symbol;
-};
+type OrSymbol<T extends readonly any[]> = { [P in keyof T]: T[P] | Symbol };
 
 type ConstructorParametersWithSymbols<I, Class extends AnyConstructor<I>> = OrSymbol<ConstructorParameters<Class>>;
 
@@ -25,12 +23,12 @@ export class IocContainer {
         }) as ConstructorParameters<C>;
     }
 
-    bindSingleton<I, C extends new (...args: any[]) => I> (
+    bindSingleton<I, C extends AnyConstructor<I>> (
         key: InjectionKey<I>,
         Implementation: C,
         args: ConstructorParametersWithSymbols<I, C>
     ) {
-        const parameters = this.getDependencies<I, C>(args);
+        const parameters = this.getDependencies(args);
 
         const instance = new Implementation(...parameters);
         this.instances.set(key, instance);
